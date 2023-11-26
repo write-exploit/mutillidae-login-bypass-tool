@@ -164,14 +164,14 @@ if __name__ == "__main__":
     main()
 
 if args.usernameList: # eğer burayı direk yazsaydık kullanıcı username adlı fonksiyonu çalıştırdıgında burası tekrar çalışırdı ve json dosyasında kullanıcıların bilgisi varsa sıfırlanırdı
-    keys = [i for i in sözlük.keys()]
+    keys = [int(i) for i in sözlük.keys()]
     for i in range(len(keys)-1,0,-1): # kısaca sort() fonksiyonu kullanılabilir
         for w in range(i):
             if keys[w] > keys[w+1]:
                 keys[w],keys[w+1] = keys[w+1],keys[w]
 
     sıralı_sözlük = []
-    [sıralı_sözlük.append({key: sözlük[key]}) for key in keys]
+    [sıralı_sözlük.append({key: sözlük[str(key)]}) for key in keys]
 
     with open("user-information.json","w",encoding='utf-8') as json_file:
         json.dump(sıralı_sözlük,json_file,ensure_ascii=False,indent=4) # indent=4 json dosyasını okunabilir bir şekilde yazdırır 
